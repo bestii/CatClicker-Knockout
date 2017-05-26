@@ -1,18 +1,14 @@
-var ViewModel = function () {
-    var self = this;
-
-    self.clickCounter = ko.observable(0);
-    self.name = ko.observable('Tabby');
-    self.imgSrc = ko.observable('img/4154543904_6e2428c421_z.jpg');
-    self.imgAttribution = ko.observable('https://www.flickr.com/photos/');
-    self.nicknames=ko.observableArray(['Tabtab','T-Bone','Mr. T','Tabby']);
-
-    self.incrementCounter = function () {
-        self.clickCounter(self.clickCounter() + 1);
-    };
-
-    self.title = ko.computed(function () {
-        var title, clicks = self.clickCounter();
+//-----------------------------------------
+// CAT OBJECT FOR THE VIEWMODEL
+//-----------------------------------------
+var Cat = function () {
+    this.clickCounter = ko.observable(0);
+    this.name = ko.observable('Tabby');
+    this.imgSrc = ko.observable('img/4154543904_6e2428c421_z.jpg');
+    this.imgAttribution = ko.observable('https://www.flickr.com/photos/');
+    this.nicknames = ko.observableArray(['Tabtab', 'T-Bone', 'Mr. T', 'Tabby']);
+    this.title = ko.computed(function () {
+        var title, clicks = this.clickCounter();
         if (clicks < 10) {
             title = "NewBorn";
         } else if (clicks < 50) {
@@ -27,8 +23,20 @@ var ViewModel = function () {
             title = "Ninja";
         }
         return title;
-    });
+    },this);
+};
+
+//-----------------------------------------
+// VIEWMODEL FOR THIS APPICATION
+//-----------------------------------------
+var ViewModel = function () {
+    var self = this;
+
+    self.currentCat=ko.observable(new Cat());
+
+    self.incrementCounter = function () {
+        self.currentCat().clickCounter(self.currentCat().clickCounter() + 1);
+    };
 };
 
 ko.applyBindings(new ViewModel());
-

@@ -7,13 +7,13 @@
 <body>
     <ul id="cat-list"></ul>
     <div id="cat">
-        <h2 data-bind="text:name"></h2>
-        <h4 data-bind="text:title"></h4>
-        <div data-bind="text:clickCounter"></div>
-        <img data-bind="attr:{src:imgSrc},click:incrementCounter" alt="cute cat">
+        <h2 data-bind="text:currentCat().name"></h2>
+        <h4 data-bind="text:currentCat().title"></h4>
+        <div data-bind="text:currentCat().clickCounter"></div>
+        <img data-bind="attr:{src:currentCat().imgSrc},click:incrementCounter" alt="cute cat">
         <div>
             <h4>Nickname:</h4>
-            <ul data-bind="foreach:nicknames">
+            <ul data-bind="foreach:currentCat().nicknames">
                 <li data-bind="text:$data"></li>
             </ul>
         </div>

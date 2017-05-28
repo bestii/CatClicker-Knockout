@@ -1,32 +1,38 @@
-var initialCats=[
-    {
+var initialCats = [{
         clickCounter: 0,
-        name: "Tabby",
-        imgSrc: "img/4154543904_6e2428c421_z.jpg",
-        imgAttribution: "https://www.flickr.com/photos/",
+        name: 'Tabby',
+        imgSrc: 'img/434164568_fea0ad4013_z.jpg',
+        imgAttribution: 'https://www.flickr.com/photos/bigtallguy/434164568',
         nicknames: ['Tabtab', 'T-Bone', 'Mr. T', 'Tabby']
     },
     {
         clickCounter: 0,
-        name: "Tabby",
-        imgSrc: "img/4154543904_6e2428c421_z.jpg",
-        imgAttribution: "https://www.flickr.com/photos/",
+        name: 'Tiger',
+        imgSrc: 'img/4154543904_6e2428c421_z.jpg',
+        imgAttribution: 'https://www.flickr.com/photos/xshamx/4154543904',
         nicknames: ['Tabtab', 'T-Bone', 'Mr. T', 'Tabby']
     },
     {
         clickCounter: 0,
-        name: "Tabby",
-        imgSrc: "img/4154543904_6e2428c421_z.jpg",
-        imgAttribution: "https://www.flickr.com/photos/",
+        name: 'Scaredy',
+        imgSrc: 'img/22252709_010df3379e_z.jpg',
+        imgAttribution: 'https://www.flickr.com/photos/kpjas/22252709',
         nicknames: ['Tabtab', 'T-Bone', 'Mr. T', 'Tabby']
     },
     {
         clickCounter: 0,
-        name: "Tabby",
-        imgSrc: "img/4154543904_6e2428c421_z.jpg",
-        imgAttribution: "https://www.flickr.com/photos/",
+        name: 'Shadow',
+        imgSrc: 'img/1413379559_412a540d29_z.jpg',
+        imgAttribution: 'https://www.flickr.com/photos/malfet/1413379559',
+        nicknames: ['Tabtab', 'T-Bone', 'Mr. T', 'Tabby']
+    }, {
+        clickCounter: 0,
+        name: 'Sleepy',
+        imgSrc: 'img/9648464288_2516b35537_z.jpg',
+        imgAttribution: 'https://www.flickr.com/photos/onesharp/9648464288',
         nicknames: ['Tabtab', 'T-Bone', 'Mr. T', 'Tabby']
     }
+
 ];
 
 
@@ -64,20 +70,19 @@ var Cat = function (data) {
 //-----------------------------------------
 var ViewModel = function () {
     var self = this;
-    self.catList=ko.observableArray([]);
-    initialCats.forEach(function(catItem){
+    self.catList = ko.observableArray([]);
+    initialCats.forEach(function (catItem) {
         self.catList.push(new Cat(catItem));
     });
-    self.currentCat = ko.observable(new Cat({
-        clickCounter: 0,
-        name: "Tabby",
-        imgSrc: "img/4154543904_6e2428c421_z.jpg",
-        imgAttribution: "https://www.flickr.com/photos/",
-        nicknames: ['Tabtab', 'T-Bone', 'Mr. T', 'Tabby']
-    }));
+    self.currentCat = ko.observable(
+        self.catList()[0]
+    );
     self.incrementCounter = function () {
         //we are in the context of currentCat after "with" binding
         this.clickCounter(this.clickCounter() + 1);
+    };
+    self.catChange = function (clickedCat) {
+        self.currentCat(clickedCat);
     };
 };
 
